@@ -51,9 +51,46 @@ public:
 		col = 0;
 		row = 0;
 	}
-	void transpose()
+	void transpose()//轉置矩陣 
 	{
+		int newCol = 0,newRow = 0;
+		
+		newCol = row;//高度 
+		newRow = col;//寬度 
+		
+		
+		int **cellN = new int*[newRow];
+		for (int i = 0; i < newRow; i++){ //建立暫存矩陣 
+			cellN[i] = new int[newCol];
+		} 
+		
 
+		for (int j = 0; j < col; j++)//寫入暫存矩陣 
+		{
+			for (int i = 0; i < row; i++){ 
+				cellN[j][i] = cell[i][j]; 
+			} 
+		}
+		
+		for (int i = 0; i < row; i++){ //刪除舊矩陣 
+			delete[] cell[i];
+		} delete[] cell;
+		
+		
+		row = newRow;
+		col = newCol;
+		
+		cell = new int*[row];
+		for (int i = 0; i < row; i++){ //建立轉置矩陣 
+			cell[i] = new int[col];
+		} 
+		
+		for (int j = 0; j < row; j++)//寫入新矩陣 
+		{
+			for (int i = 0; i < col; i++){ 
+				cell[j][i] = cellN[j][i]; 
+			} 
+		}
 	}
 };
 class App
